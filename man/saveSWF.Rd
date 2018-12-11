@@ -51,6 +51,9 @@ Please download and install the SWFTools before using this function:
   \code{ani.options('pdftk')} has been set); see \code{\link{qpdf}} or
   \code{\link{pdftk}}.
 }
+\references{
+Examples at \url{https://yihui.name/animation/example/saveswf/}
+}
 \seealso{
 Other utilities: \code{\link{im.convert}},
   \code{\link{saveGIF}}, \code{\link{saveHTML}},
@@ -59,3 +62,4 @@ Other utilities: \code{\link{im.convert}},
 \author{
 Yihui Xie
 }
+\concept{utilities}

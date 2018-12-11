@@ -75,7 +75,9 @@
 #'   \code{options(pdfviewer = 'acroread')}.
 #' @author Yihui Xie
 #' @family utilities
-#' @references To know more about the \code{animate} package, please refer to
+#' @references Examples at \url{https://yihui.name/animation/example/savelatex/}
+#'
+#'   To know more about the \code{animate} package, please refer to
 #'   \url{http://www.ctan.org/tex-archive/macros/latex/contrib/animate/}. There
 #'   are a lot of options can be set in \code{ani.opts} and \code{pkg.opts}.
 #' @export
@@ -98,7 +100,7 @@ saveLatex = function(
         if (all(c('prefix.string', 'label') %in% names(chunkopts))) {
           ## yes, I'm in Sweave w.p. 95%
           img.name = paste(chunkopts$prefix.string, chunkopts$label, sep = '-')
-          ani.options(img.fmt = paste(img.name, '%d.', file.ext, sep = ''))
+          ani.options(img.fmt = paste(img.name, ani.options('imgnfmt'), '.', file.ext, sep = ''))
           in.sweave = TRUE
           break
         }
@@ -109,7 +111,7 @@ saveLatex = function(
   interval = ani.options('interval')
   ## generate the image frames
   ani.dev = ani.options('ani.dev')
-  num = ifelse(file.ext == 'pdf' && use.dev, '', '%d')
+  num = ifelse(file.ext == 'pdf' && use.dev, '', ani.options('imgnfmt'))
   img.fmt = sprintf('%s%s.%s', img.name, num, file.ext)
   if (!in.sweave)
     ani.options(img.fmt = img.fmt)

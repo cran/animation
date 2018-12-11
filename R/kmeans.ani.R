@@ -36,6 +36,7 @@
 #'   condition for stopping the iteration has not yet been met (i.e. the cluster
 #'   membership will not change any longer).
 #' @author Yihui Xie
+#' @references Examples at \url{https://yihui.name/animation/example/kmeans-ani/}
 #' @seealso \code{\link{kmeans}}
 #' @export
 kmeans.ani = function(
@@ -73,7 +74,7 @@ kmeans.ani = function(
     }
     points(ocenters, cex = 3, col = col[1:numcent], pch = pch[1:numcent], lwd = 2)
     ani.pause()
-    if (all(ncluster == ocluster)) break
+    if (all(centers == ocenters)) break
     ocluster = ncluster
   }
   invisible(list(cluster = ncluster, centers = centers))

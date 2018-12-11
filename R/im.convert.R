@@ -10,7 +10,7 @@
 #'   containing wildcards (e.g. \file{Rplot*.png})
 #' @param output the file name of the output (with proper extensions, e.g.
 #'   \code{gif})
-#' @param convert the \command{convert} command; it must be either
+#' @param convert the \command{convert} command; it must be \code{'magick'},
 #'   \code{'convert'} or \code{'gm convert'}; and it can be pre-specified as an
 #'   option in \code{\link{ani.options}('convert')}, e.g. (Windows users)
 #'   \code{ani.options(convert = 'c:/program
@@ -69,71 +69,88 @@
 #'   failures.
 #' @author Yihui Xie
 #' @family utilities
-#' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
+#' @references Examples at \url{https://yihui.name/animation/example/im-convert/}
+#'
+#'   ImageMagick: \url{http://www.imagemagick.org/script/convert.php}
+#'
 #'   GraphicsMagick: \url{http://www.graphicsmagick.org}
 #' @export
 im.convert = function(
-  files, output = 'animation.gif', convert = c('convert', 'gm convert'),
+  files, output = 'animation.gif', convert = c('magick', 'convert', 'gm convert'),
   cmd.fun = if (.Platform$OS.type == 'windows') shell else system, extra.opts = '', clean = FALSE
 ) {
-  movie.name = basename(output)
+  movie.name = output
   interval = head(ani.options('interval'), length(files))
-  convert = match.arg(convert)
-  if (convert == 'convert') {
-    version = ''
-    if (!is.null(ani.options('convert'))) {
-      try(version <- cmd.fun(sprintf('%s --version', shQuote(ani.options('convert'))), intern = TRUE))
-    }
-    if (!length(grep('ImageMagick', version))) {
-      try(version <- cmd.fun(sprintf('%s --version', convert), intern = TRUE))
-    } else convert = ani.options('convert')
-    if (!length(grep('ImageMagick', version))) {
-      message('I cannot find ImageMagick with convert = ', shQuote(convert))
-      if (.Platform$OS.type != 'windows' || is.null(convert <- find_magic())) {
-        warning('Please install ImageMagick first or put its bin path into the system PATH variable')
-        return()
-      }
-    }
-  } else {
-    ## GraphicsMagick
-    version = ''
-    if (!is.null(ani.options('convert')))
-      try(version <- cmd.fun(sprintf('%s -version', shQuote(ani.options('convert'))), intern = TRUE))
-    if (!length(grep('GraphicsMagick', version))) {
-      try(version <- cmd.fun(sprintf('%s -version', convert), intern = TRUE))
-      if (!length(grep('GraphicsMagick', version))) {
-        warning('I cannot find GraphicsMagick with convert = ', shQuote(convert),
-                '; you may have to put the path of GraphicsMagick in the PATH variable.')
-        return()
-      }
-    } else convert = ani.options('convert')
-  }
-
   loop = ifelse(isTRUE(ani.options('loop')), 0, ani.options('loop'))
-  convert = sprintf(
-    '%s -loop %s %s %s %s', convert, loop,
-    extra.opts, paste(
-      '-delay', interval * 100,
-      if (length(interval) == 1) paste(files, collapse = ' ') else files,
-      collapse = ' '),
-    shQuote(movie.name)
-  )
-  # there might be an error "the input line is too long", and we need to quote
-  # the command; see http://stackoverflow.com/q/682799/559676
-  if (.Platform$OS.type == 'windows') convert = sprintf('"%s"', convert)
-  message('Executing: ', strwrap(convert, exdent = 4, prefix = '\n'))
-  if (interactive()) flush.console()
-  cmd = cmd.fun(convert)
-  ## if fails on Windows using shell(), try system() instead of shell()
-  if (cmd != 0 && .Platform$OS.type == 'windows' && identical(cmd.fun, shell)) {
-    cmd = system(convert)
+  convert = match.arg(convert, c('magick','convert', 'gm convert'))
+  if (convert == 'magick' && requireNamespace('magick', quietly = TRUE)) {
+    dispose_opt = regmatches(regexpr(pattern = "-dispose\\s+\\S+", text = extra.opts), x = extra.opts)
+    dispose = gsub("-dispose ", "", dispose_opt)
+    magick.convert(files = files, output = output, loop = loop, interval = interval, dispose = dispose)
+    cmd = 0
+  } else {
+    if (convert == 'convert' || convert == "magick") {
+      version = ''
+      if (!is.null(ani.options('convert'))) {
+        try(version <- cmd.fun(sprintf('%s --version', shQuote(ani.options('convert'))), intern = TRUE))
+      }
+      if (!length(grep('ImageMagick', version))) {
+        try(version <- cmd.fun(sprintf('%s --version', convert), intern = TRUE))
+      } else convert = ani.options('convert')
+      if (!length(grep('ImageMagick', version))) {
+        message('I cannot find ImageMagick with convert = ', shQuote(convert))
+        convert_switch = ifelse(convert == 'convert',"magick","convert")
+        try(version <- cmd.fun(sprintf('%s --version', convert_switch), intern = TRUE))
+        if (!length(grep('ImageMagick', version))) {
+          message('I also cannot find ImageMagick with convert = ', shQuote(convert_switch))
+          if (.Platform$OS.type != 'windows' || is.null(convert <- find_magic())) {
+            warning('Please install ImageMagick first or put its bin path into the system PATH variable')
+            return()
+          }
+        }else{
+          message('I find ImageMagick with convert = ', shQuote(convert_switch),". I will use " ,
+                  shQuote(convert_switch)," instead of ", shQuote(convert),"!")
+          convert = convert_switch
+        }
+      }
+    } else {
+      ## GraphicsMagick
+      version = ''
+      if (!is.null(ani.options('convert')))
+        try(version <- cmd.fun(sprintf('%s -version', shQuote(ani.options('convert'))), intern = TRUE))
+      if (!length(grep('GraphicsMagick', version))) {
+        try(version <- cmd.fun(sprintf('%s -version', convert), intern = TRUE))
+        if (!length(grep('GraphicsMagick', version))) {
+          warning('I cannot find GraphicsMagick with convert = ', shQuote(convert),
+                  '; you may have to put the path of GraphicsMagick in the PATH variable.')
+          return()
+        }
+      } else convert = ani.options('convert')
+    }
+
+    convert = sprintf(
+      '%s -loop %s %s %s %s', convert, loop,
+      extra.opts, paste(
+        '-delay', interval * 100,
+        if (length(interval) == 1) paste(files, collapse = ' ') else files,
+        collapse = ' '),
+      shQuote(movie.name)
+    )
+    # there might be an error "the input line is too long", and we need to quote
+    # the command; see http://stackoverflow.com/q/682799/559676
+    if (.Platform$OS.type == 'windows') convert = sprintf('"%s"', convert)
+    message('Executing: ', strwrap(convert, exdent = 4, prefix = '\n'))
+    if (interactive()) flush.console()
+    cmd = cmd.fun(convert)
+    ## if fails on Windows using shell(), try system() instead of shell()
+    if (cmd != 0 && .Platform$OS.type == 'windows' && identical(cmd.fun, shell)) {
+      cmd = system(convert)
+    }
   }
   if (cmd == 0) {
     message('Output at: ', output)
-    if (clean)
-      unlink(files)
-    if (file.exists(output))
-      auto_browse(output)
+    if (clean) unlink(files)
+    if (file.exists(output)) auto_browse(output)
   } else message('an error occurred in the conversion... see Notes in ?im.convert')
   invisible(convert)
 }
@@ -144,4 +161,12 @@ im.convert = function(
 #' @export
 gm.convert = function(..., convert = 'gm convert') {
   im.convert(..., convert = convert)
+}
+
+magick.convert = function(files, output, interval = 1, loop = 0, dispose = NULL){
+  if (!length(dispose)) dispose = "background"
+  dispose = tolower(dispose)
+  img = magick::image_read(files, strip = TRUE)
+  anim = magick::image_animate(img, loop = loop, fps = 100 / as.integer(interval * 100), dispose = dispose)
+  magick::image_write(anim, path = output)
 }

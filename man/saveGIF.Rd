@@ -6,11 +6,11 @@
 \title{Convert images to a single animation file (typically GIF) using ImageMagick
 or GraphicsMagick}
 \usage{
-saveGIF(expr, movie.name = "animation.gif", img.name = "Rplot", convert = "convert", 
-    cmd.fun, clean = TRUE, ...)
+saveGIF(expr, movie.name = "animation.gif", img.name = "Rplot", convert = "magick", 
+    cmd.fun, clean = TRUE, extra.opts = "", ...)
 
-saveMovie(expr, movie.name = "animation.gif", img.name = "Rplot", convert = "convert", 
-    cmd.fun, clean = TRUE, ...)
+saveMovie(expr, movie.name = "animation.gif", img.name = "Rplot", convert = "magick", 
+    cmd.fun, clean = TRUE, extra.opts = "", ...)
 }
 \arguments{
 \item{expr}{an expression to generate animations; use either the animation
@@ -31,6 +31,8 @@ the 'Note' section for details}
 \code{\link{system}}}
 
 \item{clean}{whether to delete the individual image frames}
+
+\item{extra.opts}{additional options passed to \code{\link{im.convert}}}
 
 \item{\dots}{other arguments passed to \code{\link{ani.options}}, e.g.
 \code{ani.height} and \code{ani.width}, ...}
@@ -79,7 +81,10 @@ See \code{\link{im.convert}} for details on the configuration of
   confusions between \code{\link{saveMovie}} and \code{\link{saveVideo}}.
 }
 \references{
-ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
+Examples at \url{https://yihui.name/animation/example/savegif/}
+
+  ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
+
   GraphicsMagick: \url{http://www.graphicsmagick.org}
 }
 \seealso{
@@ -90,3 +95,4 @@ Other utilities: \code{\link{im.convert}},
 \author{
 Yihui Xie
 }
+\concept{utilities}

@@ -18,7 +18,9 @@
 #'   returns the status of the operation (\code{0} for success; see
 #'   \code{\link{system}}); otherwise a warning will be issued
 #' @author Yihui Xie
-#' @references \url{http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}
+#' @references Examples at \url{https://yihui.name/animation/example/pdftk/}
+#' 
+#' pdftk official website \url{http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}
 #' @export
 pdftk = function(input, operation = NULL, output, other.opts = 'compress dont_ask') {
   if (!is.null(pdftk.path <- ani.options('pdftk'))) {
@@ -27,7 +29,7 @@ pdftk = function(input, operation = NULL, output, other.opts = 'compress dont_as
     auto.output = missing(output) && length(input) == 1 && file.exists(input)
     if (auto.output)
       output = file.path(dirname(input), paste('output', basename(input), sep = '-'))
-    cmd = paste(pdftk.path, paste(input, collapse = ' '),
+    cmd = paste(pdftk.path, paste(shQuote(input), collapse = ' '),
                 operation, sprintf('output %s', output), other.opts)
     message('* Pdftk is running... \n* ', cmd)
     status = system(cmd)

@@ -33,6 +33,7 @@
 #'   animation pages when we use the \code{\link{png}} device (see the examples
 #'   below).
 #' @author Yihui Xie
+#' @references Examples at \url{https://yihui.name/animation/example/ani-record/}
 #' @seealso \code{\link{recordPlot}} and \code{\link{replayPlot}};
 #'   \code{\link{ani.pause}}
 #' @export
@@ -54,7 +55,7 @@ ani.record = function(reset = FALSE, replay.cur = FALSE) {
   invisible(NULL)
 }
 
-#' Replay the animation
+#' @description Replay the animation
 #'
 #' @details \code{\link{ani.replay}} can replay the recorded plots as an
 #'   animation. Moreover, we can convert the recorded plots to other formats

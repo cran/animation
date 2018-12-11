@@ -36,6 +36,7 @@
 #' @param cmd.fun a function to invoke the OS command; by default
 #'   \code{\link{system}}
 #' @param clean whether to delete the individual image frames
+#' @param extra.opts additional options passed to \code{\link{im.convert}}
 #' @param \dots other arguments passed to \code{\link{ani.options}}, e.g.
 #'   \code{ani.height} and \code{ani.width}, ...
 #' @return The command for the conversion (see \code{\link{im.convert}}).
@@ -54,12 +55,15 @@
 #'   confusions between \code{\link{saveMovie}} and \code{\link{saveVideo}}.
 #' @author Yihui Xie
 #' @family utilities
-#' @references ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
+#' @references Examples at \url{https://yihui.name/animation/example/savegif/}
+#'
+#'   ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
+#'
 #'   GraphicsMagick: \url{http://www.graphicsmagick.org}
 #' @export
 saveGIF = function(
-  expr, movie.name = 'animation.gif', img.name = 'Rplot', convert = 'convert',
-  cmd.fun, clean = TRUE, ...
+  expr, movie.name = 'animation.gif', img.name = 'Rplot', convert = 'magick',
+  cmd.fun, clean = TRUE, extra.opts = "", ...
 ) {
   oopt = ani.options(...)
   on.exit(ani.options(oopt))
@@ -78,10 +82,18 @@ saveGIF = function(
   ## draw the plots and record them in image files
   ani.dev = ani.options('ani.dev')
   if (is.character(ani.dev)) ani.dev = get(ani.dev)
-  img.fmt = paste(img.name, '%d.', file.ext, sep = '')
-  if ((use.dev <- ani.options('use.dev')))
-    ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
-            height = ani.options('ani.height'))
+  img.fmt = paste(img.name, ani.options('imgnfmt'), '.', file.ext, sep = '')
+
+  if ((use.dev <- ani.options('use.dev'))){
+    if (any(grepl(ani.options('ani.dev'), c("png", "bmp", "jpeg", "tiff")))){
+      ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
+              height = ani.options('ani.height'), res = ani.options('ani.res'))
+      # ,bg = ani.options('ani.bg')
+    } else {
+      ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
+              height = ani.options('ani.height'))
+    }
+  }
   in_dir(owd, expr)
   if (use.dev) dev.off()
 
@@ -94,11 +106,11 @@ saveGIF = function(
   if (missing(cmd.fun))
     cmd.fun = if (.Platform$OS.type == 'windows') shell else system
   ## convert to animations
-  im.convert(img.files, output =  path.expand(movie.name), convert = convert,
-             cmd.fun = cmd.fun, clean = clean)
+  im.convert(img.files, output = path.expand(movie.name), convert = convert,
+             cmd.fun = cmd.fun, clean = clean, extra.opts = extra.opts)
   setwd(owd)
   if (!grepl(tempdir(),movie.name,fixed = T)){
-    file.copy(file.path(tempdir(), basename(movie.name)), 
+    file.copy(file.path(tempdir(), basename(movie.name)),
               path.expand(movie.name), overwrite = TRUE)
     # auto_browse(path.expand(movie.name))
   }

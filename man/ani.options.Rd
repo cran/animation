@@ -60,6 +60,17 @@ Please note that \code{nmax} is not always equal to the number of
   values might be different, e.g. PDF devices usually use inches, whereas
   bitmap devices often use pixels.}
 
+  \item{ani.res}{ The nominal resolution in ppi which will be recorded in the bitmap file,
+  if a positive integer. Also used for units other than the default,
+  and to convert points to pixels.;
+  see graphics devices like \code{\link{png}}, \code{\link{jpeg}}.}
+  
+  \item{imgnfmt}{ Customizing image number format in \code{\link{saveHTML}}, 
+  \code{\link{saveGIF}}, \code{\link{saveLatex}} and \code{\link{saveVideo}}, 
+  \code{\link{saveSWF}} is not included, 
+  it allows user to define the C-style string format for output image. 
+  }
+
   \item{imgdir}{character: the name of the directory (a relative path) for
   images when creating HTML animation pages; default to be \code{'images'}.}
 
@@ -163,6 +174,9 @@ Please note that \code{nmax} is not always equal to the number of
   }
 }
 
+\references{
+Examples at \url{https://yihui.name/animation/example/ani-options/}
+}
 \seealso{
 \code{\link{options}}, \code{\link{dev.interactive}},
   \code{\link{saveHTML}}, \code{\link{saveGIF}}, \code{\link{saveLatex}},
