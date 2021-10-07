@@ -55,10 +55,10 @@
 #' @author Yihui Xie
 #' @note Bug reports and feature requests can be sent to
 #'   \url{https://github.com/yihui/animation/issues}.
-#' @references Examples at \url{https://yihui.name/animation/example/animation-package/}
+#' @references Examples at \url{https://yihui.org/animation/example/animation-package/}
 #'
 #'   The associated website for this package:
-#'   \url{https://yihui.name/animation}
+#'   \url{https://yihui.org/animation}
 #'
 #'   Yihui Xie and Xiaoyue Cheng. animation: A package for statistical
 #'   animations. \emph{R News}, \bold{8}(2):23--27, October 2008.  URL:
@@ -69,7 +69,7 @@
 #'
 #'   Yihui Xie (2013). animation: An R Package for Creating Animations and
 #'   Demonstrating Statistical Methods. \emph{Journal of Statistical Software},
-#'   \bold{53}(1), 1-27. URL \url{http://www.jstatsoft.org/v53/i01/}.
+#'   \bold{53}(1), 1-27. URL \doi{10.18637/jss.v053.i01}.
 #' @seealso \code{\link{saveHTML}}, \code{\link{saveGIF}},
 #'   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link{saveLatex}}
 #' @import datasets grDevices graphics stats utils
@@ -87,7 +87,8 @@ NULL
 #' @docType data
 #' @format int [1:75] 119 175 222 204 276 168 257 89 61 288 ...
 #' @source The full text of speech is at
-#'   \url{http://cpc.people.com.cn/GB/64093/64094/8544901.html}
+#'   \verb{http://cpc.people.com.cn/GB/64093/64094/8544901.html} (you may use
+#'   \verb{web.archive.org} if this URL is no longer accessible).
 #' @examples
 #' ## clear pattern: 1/3 short, 1/3 long, 1/3 short again
 #' plot(HuSpeech, type = 'b', pch = 20, xlab = 'paragraph index',
@@ -114,7 +115,7 @@ NULL
 
 #' Page views from Sep 21, 2007 to Dec 2, 2007 of Yihui's website
 #'
-#' The data is collected by Awstats for the website \url{http://yihui.name}.
+#' The data is collected by Awstats for the website \url{http://yihui.org}.
 #' @name pageview
 #' @docType data
 #' @format A data frame with 73 observations on the following 5 variables.
@@ -128,7 +129,7 @@ NULL
 #'   \emph{page, image, file} of the site is viewed or downloaded by someone.}
 #'   \item{bandwidth}{amount of data downloaded by all \emph{pages},
 #'   \emph{images} and \emph{files} within the site (units in MegaBytes).} }
-#' @source \url{http://yihui.name}
+#' @source \url{http://yihui.org}
 #' @examples
 #' plot(pageview[,1:2], type = 'b', col = 'red',
 #'   main = "Number of Visits in Yihui's Web")

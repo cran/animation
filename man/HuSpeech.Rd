@@ -4,10 +4,13 @@
 \name{HuSpeech}
 \alias{HuSpeech}
 \title{Word counts of a speech by the Chinese President Hu}
-\format{int [1:75] 119 175 222 204 276 168 257 89 61 288 ...}
+\format{
+int [1:75] 119 175 222 204 276 168 257 89 61 288 ...
+}
 \source{
 The full text of speech is at
-  \url{http://cpc.people.com.cn/GB/64093/64094/8544901.html}
+  \verb{http://cpc.people.com.cn/GB/64093/64094/8544901.html} (you may use
+  \verb{web.archive.org} if this URL is no longer accessible).
 }
 \description{
 This speech came on the 30th anniversary of China's economic reform in 1978.

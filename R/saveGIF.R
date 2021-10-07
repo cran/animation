@@ -55,7 +55,7 @@
 #'   confusions between \code{\link{saveMovie}} and \code{\link{saveVideo}}.
 #' @author Yihui Xie
 #' @family utilities
-#' @references Examples at \url{https://yihui.name/animation/example/savegif/}
+#' @references Examples at \url{https://yihui.org/animation/example/savegif/}
 #'
 #'   ImageMagick: \url{http://www.imagemagick.org/script/convert.php};
 #'
@@ -85,10 +85,9 @@ saveGIF = function(
   img.fmt = paste(img.name, ani.options('imgnfmt'), '.', file.ext, sep = '')
 
   if ((use.dev <- ani.options('use.dev'))){
-    if (any(grepl(ani.options('ani.dev'), c("png", "bmp", "jpeg", "tiff")))){
+    if ("res" %in% names(formals(ani.dev))){
       ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
               height = ani.options('ani.height'), res = ani.options('ani.res'))
-      # ,bg = ani.options('ani.bg')
     } else {
       ani.dev(file.path(tempdir(), img.fmt), width = ani.options('ani.width'),
               height = ani.options('ani.height'))

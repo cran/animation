@@ -64,11 +64,11 @@ Please note that \code{nmax} is not always equal to the number of
   if a positive integer. Also used for units other than the default,
   and to convert points to pixels.;
   see graphics devices like \code{\link{png}}, \code{\link{jpeg}}.}
-  
-  \item{imgnfmt}{ Customizing image number format in \code{\link{saveHTML}}, 
-  \code{\link{saveGIF}}, \code{\link{saveLatex}} and \code{\link{saveVideo}}, 
-  \code{\link{saveSWF}} is not included, 
-  it allows user to define the C-style string format for output image. 
+
+  \item{imgnfmt}{ Customizing image number format in \code{\link{saveHTML}},
+  \code{\link{saveGIF}}, \code{\link{saveLatex}} and \code{\link{saveVideo}},
+  \code{\link{saveSWF}} is not included,
+  it allows user to define the C-style string format for output image.
   }
 
   \item{imgdir}{character: the name of the directory (a relative path) for
@@ -88,9 +88,8 @@ Please note that \code{nmax} is not always equal to the number of
   \item{title, description}{character: the title and description of the
   animation in the HTML page created by \code{\link{saveHTML}}}
 
-  \item{verbose}{ logical or character: if \code{TRUE}, write a footer part
-  in the HTML page containing detailed technical information; if given a
-  character string, it will be used as the footer message; in other cases,
+  \item{verbose}{logical: if \code{TRUE}, write a footer part
+  in the HTML page containing detailed technical information else
   the footer of the page will be blank.}
 
   \item{loop}{logical or numeric: Number of times the GIF animation is to
@@ -175,16 +174,16 @@ Please note that \code{nmax} is not always equal to the number of
 }
 
 \references{
-Examples at \url{https://yihui.name/animation/example/ani-options/}
+Examples at \url{https://yihui.org/animation/example/ani-options/}
 }
 \seealso{
 \code{\link{options}}, \code{\link{dev.interactive}},
   \code{\link{saveHTML}}, \code{\link{saveGIF}}, \code{\link{saveLatex}},
   \code{\link{saveSWF}}, \code{\link{pdftk}}
 
-  \url{http://qpdf.sourceforge.net/}
+  \url{https://qpdf.sourceforge.io/}
 
-  \url{http://www.pdflabs.com/docs/pdftk-man-page/}
+  \url{https://www.pdflabs.com/docs/pdftk-man-page/}
 }
 \author{
 Yihui Xie

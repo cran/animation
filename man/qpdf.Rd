@@ -31,9 +31,9 @@ be set via \code{\link{ani.options}(qpdf = 'path/to/qpdf')}.
 See the reference for detailed usage of \command{qpdf}.
 }
 \references{
-Examples at \url{https://yihui.name/animation/example/qpdf/}
+Examples at \url{https://yihui.org/animation/example/qpdf/}
 
-qpdf official website \url{http://qpdf.sourceforge.net/}
+qpdf official website \url{https://qpdf.sourceforge.io/}
 }
 \author{
 Yihui Xie

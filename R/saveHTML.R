@@ -71,7 +71,7 @@
 #'   use in a long period (currently we are using the Rweb at Tama University).
 #'   See the last example below.
 #' @author Yihui Xie
-#' @references Examples at \url{https://yihui.name/animation/example/savehtml/}
+#' @references Examples at \url{https://yihui.org/animation/example/savehtml/}
 #'
 #'   scianimator official website \url{https://github.com/brentertz/scianimator}
 #' @family utilities
@@ -132,8 +132,14 @@ saveHTML = function(
 
   img.fmt = file.path(imgdir, paste(img.name, ani.options('imgnfmt'), '.', ani.type, sep = ''))
   ani.options(img.fmt = img.fmt)
-  if ((use.dev <- ani.options('use.dev')))
-    ani.dev(img.fmt, width = ani.options('ani.width'), height = ani.options('ani.height'))
+  if ((use.dev <- ani.options('use.dev'))) {
+    if ("res" %in% names(formals(ani.dev))){
+      ani.dev(img.fmt, width = ani.options('ani.width'),
+              height = ani.options('ani.height'), res = ani.options('ani.res'))
+    } else {
+      ani.dev(img.fmt, width = ani.options('ani.width'), height = ani.options('ani.height'))
+    }
+  }
   eval(expr)
   if (use.dev) dev.off()
 
@@ -199,6 +205,12 @@ saveHTML = function(
     browseURL(paste('file:///', normalizePath(htmlfile), sep = ''))
   ani.options(oopt)
   message('HTML file created at: ', htmlfile)
+
+  # a dirty hack to delete "non-standard things" during R CMD check
+  if (!interactive() && !is.na(Sys.getenv('_R_CHECK_PACKAGE_NAME_', NA))) {
+    unlink(c('css', imgdir, htmlfile, 'js'), recursive = TRUE)
+  }
+
   invisible(htmlfile)
 }
 

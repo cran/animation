@@ -4,9 +4,14 @@
 \alias{saveVideo}
 \title{Convert a sequence of images to a video by FFmpeg}
 \usage{
-saveVideo(expr, video.name = "animation.mp4", img.name = "Rplot", 
-    ffmpeg = ani.options("ffmpeg"), other.opts = if (grepl("[.]mp4$", 
-        video.name)) "-pix_fmt yuv420p", ...)
+saveVideo(
+  expr,
+  video.name = "animation.mp4",
+  img.name = "Rplot",
+  ffmpeg = ani.options("ffmpeg"),
+  other.opts = if (grepl("[.]mp4$", video.name)) "-pix_fmt yuv420p",
+  ...
+)
 }
 \arguments{
 \item{expr}{the R code to draw (several) plots}
@@ -48,17 +53,20 @@ Some linux systems may use the alternate software 'avconv' instead of 'ffmpeg'. 
 There are a lot of possibilities in optimizing the video. My knowledge
   on FFmpeg is very limited, hence the default output by this function could
   be of low quality or too large. The file \file{presets.xml} of WinFF might
-  be a good guide: \url{http://code.google.com/p/winff/}.
+  be a good guide: \url{https://code.google.com/archive/p/winff}.
 }
 \references{
-Examples at \url{https://yihui.name/animation/example/savevideo/}
+Examples at \url{https://yihui.org/animation/example/savevideo/}
 
   To know more about ffmpeg, please see \url{http://ffmpeg.org/documentation.html}
 }
 \seealso{
-Other utilities: \code{\link{im.convert}},
-  \code{\link{saveGIF}}, \code{\link{saveHTML}},
-  \code{\link{saveLatex}}, \code{\link{saveSWF}}
+Other utilities: 
+\code{\link{im.convert}()},
+\code{\link{saveGIF}()},
+\code{\link{saveHTML}()},
+\code{\link{saveLatex}()},
+\code{\link{saveSWF}()}
 }
 \author{
 Yihui Xie, based on an inital version by Thomas Julou

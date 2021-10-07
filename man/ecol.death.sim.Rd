@@ -4,8 +4,17 @@
 \alias{ecol.death.sim}
 \title{A simulation of the death of two species with certain probabilities}
 \usage{
-ecol.death.sim(nr = 10, nc = 10, num.sp = c(50, 50), col.sp = c(1, 2), pch.sp = c(1, 
-    2), col.die = 1, pch.die = 4, cex = 3, ...)
+ecol.death.sim(
+  nr = 10,
+  nc = 10,
+  num.sp = c(50, 50),
+  col.sp = c(1, 2),
+  pch.sp = c(1, 2),
+  col.die = 1,
+  pch.die = 4,
+  cex = 3,
+  ...
+)
 }
 \arguments{
 \item{nr, nc}{number of rows and columns of the field (plants grow on a
@@ -52,7 +61,7 @@ This animation is motivated by a question raised from Jing Jiao,
   a student in biology, to show the evolution of two species.
 
   The original post is in the forum of the ``Capital of Statistics'':
-  \url{http://cos.name/cn/topic/14093} (in Chinese)
+  \url{https://d.cosx.org/d/14093} (in Chinese)
 }
 \author{
 Yihui Xie

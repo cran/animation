@@ -74,10 +74,10 @@ Bug reports and feature requests can be sent to
 }
 
 \references{
-Examples at \url{https://yihui.name/animation/example/animation-package/}
+Examples at \url{https://yihui.org/animation/example/animation-package/}
 
   The associated website for this package:
-  \url{https://yihui.name/animation}
+  \url{https://yihui.org/animation}
 
   Yihui Xie and Xiaoyue Cheng. animation: A package for statistical
   animations. \emph{R News}, \bold{8}(2):23--27, October 2008.  URL:
@@ -88,7 +88,7 @@ Examples at \url{https://yihui.name/animation/example/animation-package/}
 
   Yihui Xie (2013). animation: An R Package for Creating Animations and
   Demonstrating Statistical Methods. \emph{Journal of Statistical Software},
-  \bold{53}(1), 1-27. URL \url{http://www.jstatsoft.org/v53/i01/}.
+  \bold{53}(1), 1-27. URL \doi{10.18637/jss.v053.i01}.
 }
 \seealso{
 \code{\link{saveHTML}}, \code{\link{saveGIF}},

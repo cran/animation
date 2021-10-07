@@ -4,9 +4,17 @@
 \alias{buffon.needle}
 \title{Simulation of Buffon's Needle}
 \usage{
-buffon.needle(l = 0.8, d = 1, redraw = TRUE, mat = matrix(c(1, 3, 2, 3), 2), 
-    heights = c(3, 2), col = c("lightgray", "red", "gray", "red", "blue", "black", 
-        "red"), expand = 0.4, type = "l", ...)
+buffon.needle(
+  l = 0.8,
+  d = 1,
+  redraw = TRUE,
+  mat = matrix(c(1, 3, 2, 3), 2),
+  heights = c(3, 2),
+  col = c("lightgray", "red", "gray", "red", "blue", "black", "red"),
+  expand = 0.4,
+  type = "l",
+  ...
+)
 }
 \arguments{
 \item{l}{numerical. length of the needle; shorter than \code{d}.}
@@ -45,8 +53,8 @@ is one of the oldest problems in the field of geometrical probability.
 }
 \details{
 This is quite an old problem in probability. For mathematical background,
-please refer to \url{http://en.wikipedia.org/wiki/Buffon's_needle} or
-\url{http://www.mste.uiuc.edu/reese/buffon/buffon.html}.
+please refer to \url{https://en.wikipedia.org/wiki/Buffon's_needle} or
+\url{https://mste.illinois.edu/activity/buffon/}.
 
 `Needles' are denoted by segments on the 2D plane, and dropped randomly to
 check whether they cross the parallel lines. Through many times of `dropping'
@@ -66,7 +74,7 @@ Note that \code{redraw} has great influence on the speed of the
   The maximum number of drops is specified in \code{ani.options('nmax')}.
 }
 \references{
-Examples at \url{https://yihui.name/animation/example/buffon-needle/}
+Examples at \url{https://yihui.org/animation/example/buffon-needle/}
 
   Ramaley, J. F. (Oct 1969). Buffon's Noodle Problem. \emph{The
   American Mathematical Monthly} \bold{76} (8): 916-918.
