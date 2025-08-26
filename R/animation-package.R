@@ -51,7 +51,6 @@
 #'   \file{wmv}, etc).
 #' @name animation-package
 #' @aliases animation
-#' @docType package
 #' @author Yihui Xie
 #' @note Bug reports and feature requests can be sent to
 #'   \url{https://github.com/yihui/animation/issues}.
@@ -73,7 +72,7 @@
 #' @seealso \code{\link{saveHTML}}, \code{\link{saveGIF}},
 #'   \code{\link{saveSWF}}, \code{\link{saveVideo}}, \code{\link{saveLatex}}
 #' @import datasets grDevices graphics stats utils
-NULL
+'_PACKAGE'
 
 #' Word counts of a speech by the Chinese President Hu
 #'
@@ -148,7 +147,7 @@ NULL
 #'   \item{CRACK}{a numeric vector} \item{WEIGHT}{a numeric vector}
 #'   \item{DENSITY}{a numeric vector} }
 #' @source collected from Statlib Datasets Archive:
-#'   \url{http://lib.stat.cmu.edu/data-expo/}
+#'   \url{https://web.archive.org/web/20240415032227/http://lib.stat.cmu.edu/data-expo/1986.html}
 #' @examples
 #' ## some dense points in the center?
 #' plot(pollen[, 1:2], pch = 20, col = rgb(0, 0, 0, 0.1))

@@ -1,3 +1,7 @@
+# CHANGES IN animation VERSION 2.8
+
+- Added a new demo: `demo('estimate_pi', package = 'animation')` (thanks, @chuxinyuan, #141).
+
 # CHANGES IN animation VERSION 2.7
 
 - `saveGIF()` didn't work when the option `ani.dev` is set to a function (thanks, @stla, #120 #121).
@@ -10,7 +14,7 @@
 
 ## NEW FEATURES
 
-- add a new option `ani.res` to ani.options(), to control the resolution of png, jepg, bmp and tiff images when using saveGIF() (#99).
+- Added a new option `ani.res` to ani.options(), to control the resolution of png, jpeg, bmp and tiff images when using saveGIF() (#99).
 
 - saveGIF() and im.convert() now support converting using the 'magick' R package which does not require shelling out to external software.
 
